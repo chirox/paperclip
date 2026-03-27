@@ -10,7 +10,20 @@ import { processUIAdapter } from "./process";
 import { httpUIAdapter } from "./http";
 import { zeroClawLocalUIAdapter } from "./zeroclaw-local";
 
+const uiAdapters: UIAdapterModule[] = [
+  claudeLocalUIAdapter,
+  codexLocalUIAdapter,
+  geminiLocalUIAdapter,
+  openCodeLocalUIAdapter,
+  piLocalUIAdapter,
+  cursorLocalUIAdapter,
+  openClawGatewayUIAdapter,
+  processUIAdapter,
+  httpUIAdapter,
+];
+
 const adaptersByType = new Map<string, UIAdapterModule>(
+<<<<<<< HEAD
   [
     claudeLocalUIAdapter,
     codexLocalUIAdapter,
@@ -23,8 +36,15 @@ const adaptersByType = new Map<string, UIAdapterModule>(
     httpUIAdapter,
     zeroClawLocalUIAdapter,
   ].map((a) => [a.type, a]),
+=======
+  uiAdapters.map((a) => [a.type, a]),
+>>>>>>> a5d47166e2d891960ac53865bad06f56903356d1
 );
 
 export function getUIAdapter(type: string): UIAdapterModule {
   return adaptersByType.get(type) ?? processUIAdapter;
+}
+
+export function listUIAdapters(): UIAdapterModule[] {
+  return [...uiAdapters];
 }
