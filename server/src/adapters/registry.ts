@@ -54,6 +54,16 @@ import {
 import { processAdapter } from "./process/index.js";
 import { httpAdapter } from "./http/index.js";
 
+import {
+  execute as zeroclawExecute,
+  testEnvironment as zeroclawTestEnvironment,
+  sessionCodec as zeroclawSessionCodec,
+} from "@paperclipai/adapter-zeroclaw-local/server";
+import {
+  agentConfigurationDoc as zeroclawAgentConfigurationDoc,
+  models as zeroclawModels,
+} from "@paperclipai/adapter-zeroclaw-local";
+
 const claudeLocalAdapter: ServerAdapterModule = {
   type: "claude_local",
   execute: claudeExecute,
@@ -127,6 +137,16 @@ const piLocalAdapter: ServerAdapterModule = {
   agentConfigurationDoc: piAgentConfigurationDoc,
 };
 
+const zeroclawLocalAdapter: ServerAdapterModule = {
+  type: "zeroclaw_local",
+  execute: zeroclawExecute,
+  testEnvironment: zeroclawTestEnvironment,
+  sessionCodec: zeroclawSessionCodec,
+  models: zeroclawModels,
+  supportsLocalAgentJwt: true,
+  agentConfigurationDoc: zeroclawAgentConfigurationDoc,
+};
+
 const adaptersByType = new Map<string, ServerAdapterModule>(
   [
     claudeLocalAdapter,
@@ -138,6 +158,7 @@ const adaptersByType = new Map<string, ServerAdapterModule>(
     openclawGatewayAdapter,
     processAdapter,
     httpAdapter,
+    zeroclawLocalAdapter,
   ].map((a) => [a.type, a]),
 );
 
